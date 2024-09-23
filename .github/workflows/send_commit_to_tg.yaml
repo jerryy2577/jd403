@@ -1,0 +1,30 @@
+name: Send Commit Message to Telegram
+
+on:
+  push:
+    branches:
+      - main  # 监听推送到 main 分支的事件
+
+jobs:
+  send-commit-message:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Get last commit message
+        id: get_commit_message
+        run: |
+          COMMIT_MESSAGE=$(git log -1 --pretty=format:"%s")
+          echo "commit_message=$COMMIT_MESSAGE" >> $GITHUB_ENV
+
+      - name: Send message to Telegram
+        env:
+          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+          TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
+          COMMIT_MESSAGE: ${{ env.commit_message }}
+        run: |
+          curl -s -X POST https://api.telegram.org/bot${TG_BOT_TOKEN}/sendMessage \
+          -d chat_id=${TG_CHAT_ID} \
+          -d text="${COMMIT_MESSAGE}"
