@@ -1,21 +1,22 @@
 """
 /**
- * name: 缓存Token
- * cron: 7 7 7 7 7
+ * name: 新东东农场奖品一对一推送
+ * cron: 30 12 * * *
  */
 """
 import httpx
 from conf import config
 from utils.coroutines import start, async_print
 from utils.proxy import get_proxies
-from utils.jd_farm import JdFarm, UA
+from utils.new_farm import JdFarm, UA
 from utils.com import unquote_pt_pin, match_value_from_cookie
 from utils.ct import ct
 from utils.push import wp_push
 
 
 async def query_award(**kwargs):
-    params = await JdFarm.create_params('farm_award_detail', {"version": 5, "type": 1}, kwargs.get('pin'))
+    params = await JdFarm.create_params('farm_award_detail', {"version": 7, "channelParam": "1", "type": 1},
+                                        kwargs.get('pin'))
     url = 'https://api.m.jd.com/client.action'
     return await JdFarm.post(url, params, **kwargs)
 
@@ -48,7 +49,7 @@ async def jd_new_farm_notify(jd_ck, **kwargs):
             return
 
         for award in award_list:
-            if award['awardStatus'] == 1:   # 奖品未领取
+            if award['awardStatus'] == 1:  # 奖品未领取
                 exchange_remind = award['exchangeRemind']
                 notify_msg += (f'- 账号:{pt_pin}种植的水果奖励实物卷, {exchange_remind}'
                                f'请尽快去京东APP中使用~\n **奖品兑换入口: 我的->东东农场->记录(在左上角)**')

@@ -20,6 +20,9 @@ class Config:
         self.JY_JD_FARM_WATER_RETRY_DELAY = None
         self.JY_JD_FARM_QUERY_AWARD_CONC_NUM = None
         self.JY_JD_FARM_WATER_CONC_NUM = None
+        self.JY_JD_FARM_TASK_CONC_NUM = None
+        self.JY_JD_WYW_EXCHANGE_CONC = None
+        self.JY_JD_WYW_EXCHANGE_AWARD = None
 
     def set(self, **kwargs):
         for key, value in kwargs.items():

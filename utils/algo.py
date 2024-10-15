@@ -39,7 +39,7 @@ def get_h5st(pin, body, ua, h5st='', version='4.7.4'):
             "pin": pin,
             "debug": False
         }
-        r = httpx.post(url, json=data)
+        r = httpx.post(url, json=data, proxies=get_no_proxies())
         data = r.json()
         if data.get('code') != 200:
             return ''

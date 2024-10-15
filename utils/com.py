@@ -1,4 +1,5 @@
 import datetime
+import random
 import re
 from urllib.parse import unquote
 
@@ -33,3 +34,18 @@ def get_timestamp_n_days_ago(n):
     # 将秒时间戳转换为毫秒时间戳
     ms_timestamp = int(seconds_timestamp * 1000)
     return ms_timestamp
+
+
+def random_number_string(n, prefix=''):
+    """
+    :param prefix:
+    :param n:
+    :return:
+    """
+    alpha = '0123456789'
+    return prefix + ''.join(random.choice(alpha) for _ in range(n - len(prefix)))
+
+
+if __name__ == '__main__':
+    print(random_number_string(16, '5'))
+    print(random_number_string(16, '3'))
