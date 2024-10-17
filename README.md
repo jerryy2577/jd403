@@ -4,7 +4,7 @@
 群组: https://t.me/jd403la
 必看: [https://www.52hym666.top/](https://www.52hym666.top/)
 上车: [京东短信车](https://jdc.52hym666.top/)
-
+博客: [https://www.52hym666.top/](https://www.52hym666.top/archives/1111)
 ## 食用教程
 1. 青龙面板拉库命令:  `ql repo https://github.com/jerryy2577/jd403.git "jd_|install_deps" "jd_farm" "utils|notify|db|conf|storage|jd_farm" "main"`
 2. 青龙面板定时任务页面搜索:`install_deps`, 运行一次`一键初始化配置和安装依赖`任务。
